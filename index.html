@@ -9,6 +9,11 @@
       rel="stylesheet"
     />
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css"
+    />
     <style>
       * {
         margin: 0;
@@ -29,11 +34,107 @@
       .leftcontiner {
         width: 30%;
         background-color: white;
+        position: relative;
+        overflow: hidden;
       }
 
       #map {
         flex: 1;
       }
+
+      .searchfield {
+        padding: 16px;
+        border-bottom: 1px solid #e5e7eb;
+      }
+
+      .filter-section {
+        padding: 16px;
+        border-bottom: 1px solid #e5e7eb;
+      }
+
+      .more-filters-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: none;
+        border: none;
+        font-size: 16px;
+        font-weight: 500;
+        color: #2563eb;
+        cursor: pointer;
+        padding: 8px 0;
+      }
+
+      .more-filters-btn svg {
+        transition: transform 0.2s;
+      }
+
+      .more-filters-btn.active svg {
+        transform: rotate(180deg);
+      }
+
+      .filters-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+      }
+
+      .filters-content.active {
+        max-height: 500px;
+      }
+
+      .filter-group {
+        margin-top: 16px;
+      }
+
+      .filter-group label {
+        display: block;
+        font-size: 14px;
+        color: #4b5563;
+        margin-bottom: 8px;
+      }
+
+      .range-container {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      #radius {
+        flex: 1;
+      }
+
+      #radius-value {
+        min-width: 80px;
+        font-size: 14px;
+        color: #6b7280;
+      }
+
+      .reset-btn {
+        display: inline-flex;
+        align-items: center;
+        background-color: #f3f4f6;
+        color: #374151;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        margin-top: 12px;
+      }
+
+      .reset-btn:hover {
+        background-color: #e5e7eb;
+      }
+
+      .reset-btn svg {
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
+      }
+
       .location-details {
         background: #f9fafb;
         padding: 16px;
@@ -62,6 +163,16 @@
         flex-grow: 1;
         overflow-y: scroll;
         height: 100vh;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        transition: transform 0.3s ease-in-out;
+        background: white;
+      }
+
+      .locationlist.slide {
+        transform: translateX(-100%);
       }
 
       .location-item {
@@ -92,45 +203,175 @@
         font-size: 14px;
         color: #6b7280;
       }
-      .location-icon {
-    fill: #cacaca;
-    height: 16px;
-    position: relative;
-    top: 3px;
-    width: 16px;
-}
-.arrow-icon {
-    height: 16px;
-    position: relative;
-    right: 8px;
-}
 
-.locationinfo {
-    width: 95%;
-}
+      .location-icon {
+        fill: #cacaca;
+        height: 16px;
+        position: relative;
+        top: 3px;
+        width: 16px;
+      }
+
+      .arrow-icon {
+        height: 16px;
+        position: relative;
+        right: 8px;
+      }
+
+      .locationinfo {
+        width: 95%;
+      }
+
+      .location-detail-panel {
+        position: absolute;
+        left: 100%;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        background: white;
+        transition: transform 0.3s ease-in-out;
+        overflow-y: auto;
+      }
+
+      .location-detail-panel.active {
+        transform: translateX(-100%);
+      }
+
+      .back-button {
+        display: flex;
+        align-items: center;
+        padding: 16px;
+        cursor: pointer;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      }
+
+      .back-button svg {
+        transform: rotate(180deg);
+        margin-right: 8px;
+      }
+
+      .location-detail-content {
+        padding: 20px;
+      }
+
+      .detail-header {
+        margin-bottom: 24px;
+      }
+
+      .detail-header h2 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      .detail-section {
+        margin-bottom: 20px;
+      }
+
+      .detail-section h3 {
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 8px;
+        color: #374151;
+      }
+
+      .detail-section p {
+        color: #6b7280;
+        line-height: 1.5;
+      }
+
+      .get-directions-btn {
+        display: inline-flex;
+        align-items: center;
+        background-color: #2563eb;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 6px;
+        font-weight: 500;
+        text-decoration: none;
+        margin-top: 16px;
+        transition: background-color 0.2s;
+      }
+
+      .get-directions-btn:hover {
+        background-color: #1d4ed8;
+      }
+
+      .get-directions-btn svg {
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+      }
+
+      .mapboxgl-ctrl-geocoder {
+        width: 100% !important;
+        max-width: none !important;
+        box-shadow: none !important;
+        border: 1px solid #e5e7eb;
+      }
+
+      .mapboxgl-ctrl-geocoder--input {
+        height: 44px !important;
+      }
+
+      .mapboxgl-ctrl-geocoder--icon {
+        top: 12px !important;
+      }
+
+      .mapboxgl-ctrl-geocoder--button {
+        top: 8px !important;
+      }
     </style>
   </head>
 
   <body>
     <div class="maincontainer">
       <div class="leftcontiner">
-        <div class="searchfield">
-          <input type="search" class="inputsearch" />
+        <div class="locationlist">
+          <div class="searchfield">
+            <div id="geocoder"></div>
+          </div>
+          <div class="filter-section">
+            <button class="more-filters-btn">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 6h18M6 12h12m-9 6h6"/>
+              </svg>
+              More Filters
+            </button>
+            <div class="filters-content">
+              <div class="filter-group">
+                <label for="radius">Distance</label>
+                <div class="range-container">
+                  <input
+                    type="range"
+                    min="1"
+                    max="100"
+                    value="100"
+                    id="radius"
+                  />
+                  <span id="radius-value">100 miles</span>
+                </div>
+                <button class="reset-btn">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                    <path d="M3 3v5h5"/>
+                  </svg>
+                  Reset Filters
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="location-items"></div>
         </div>
-        <div class="filter">
-          <label for="radius">Distance</label>
-          <input
-            type="range"
-            min="1"
-            max="100"
-            value="100"
-            id="radius"
-            placeholder="Enter city, zip or address.."
-          />
-          <span id="radius-value">100 miles</span>
-          <button>Reset</button>
+        <div class="location-detail-panel">
+          <div class="back-button">
+            <svg class="MuiSvgIcon-root arrow-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5.88 4.12L13.76 12l-7.88 7.88L8 22l10-10L8 2z"></path>
+            </svg>
+            Back to list
+          </div>
+          <div class="location-detail-content"></div>
         </div>
-        <div class="locationlist"></div>
       </div>
       <div id="map"></div>
     </div>
@@ -143,28 +384,95 @@
       let locations = [];
       var radiusRange = 100;
       var markerList = [];
+      var map;
 
       window.onload = function () {
         const radiusInput = document.getElementById("radius");
         const radiusValue = document.getElementById("radius-value");
-        const locationList = document.querySelector(".locationlist"); // Changed to querySelector with class
+        const locationList = document.querySelector(".locationlist");
+        const locationItems = document.querySelector(".location-items");
+        const detailPanel = document.querySelector(".location-detail-panel");
+        const backButton = document.querySelector(".back-button");
+        const detailContent = document.querySelector(".location-detail-content");
+        const moreFiltersBtn = document.querySelector(".more-filters-btn");
+        const filtersContent = document.querySelector(".filters-content");
+        const resetBtn = document.querySelector(".reset-btn");
+
+        // Initialize Mapbox Geocoder
+        const geocoder = new MapboxGeocoder({
+          accessToken: mapboxgl.accessToken,
+          mapboxgl: mapboxgl,
+          placeholder: 'Enter city, zip, or address...',
+          marker: false
+        });
+
+        document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+
+        // Handle location selection from geocoder
+        geocoder.on('result', function(e) {
+          const coords = e.result.center;
+          center = coords;
+          
+          // Update map center and recalculate distances
+          map.flyTo({
+            center: coords,
+            zoom: 12,
+            essential: true
+          });
+
+          // Create new center marker
+          if (markerList.length > 0) {
+            markerList.forEach(marker => marker.remove());
+            markerList = [];
+          }
+
+          const el = document.createElement("div");
+          el.innerHTML = `
+            <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#FF0000" d="M16 0C10.477 0 6 4.477 6 10c0 6.273 10 22 10 22s10-15.727 10-22c0-5.523-4.477-10-10-10zm0 16a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"/>
+            </svg>`;
+          new mapboxgl.Marker(el).setLngLat(coords).addTo(map);
+
+          filterLocations();
+        });
+
+        // Toggle More Filters
+        moreFiltersBtn.addEventListener('click', () => {
+          moreFiltersBtn.classList.toggle('active');
+          filtersContent.classList.toggle('active');
+        });
+
+        // Reset filters
+        resetBtn.addEventListener('click', () => {
+          radiusInput.value = 100;
+          radiusRange = 100;
+          radiusValue.textContent = '100 miles';
+          filterLocations();
+        });
+
+        backButton.addEventListener("click", () => {
+          detailPanel.classList.remove("active");
+          locationList.classList.remove("slide");
+          map.flyTo({
+            center: center,
+            zoom: 12,
+            essential: true
+          });
+        });
 
         radiusInput.addEventListener("input", (e) => {
           radiusRange = e.target.value;
-          console.log(radiusRange);
           radiusValue.textContent = `${radiusRange} miles`;
           filterLocations();
         });
 
-        //Displaying map
-        const map = new mapboxgl.Map({
+        map = new mapboxgl.Map({
           container: "map",
           style: "mapbox://styles/mapbox/streets-v11",
           center: center,
           zoom: 12,
         });
 
-        //displaying marker on given location
         const el = document.createElement("div");
         el.innerHTML = `
             <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -172,30 +480,61 @@
             </svg>`;
         new mapboxgl.Marker(el).setLngLat(center).addTo(map);
 
-        // Fetch the locations from the JSON file
         fetch("locations.json")
           .then((response) => response.json())
           .then((data) => {
-            locations = data; // Store the data from the JSON file
-            filterLocations(); // Filter and display locations on the map after loading data
+            locations = data;
+            filterLocations();
           })
           .catch((error) => console.error("Error loading JSON data:", error));
 
+        function showLocationDetails(location, distance) {
+          map.flyTo({
+            center: location.coordinates,
+            zoom: 15,
+            essential: true
+          });
+
+          const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${location.coordinates[1]},${location.coordinates[0]}`;
+
+          detailContent.innerHTML = `
+            <div class="detail-header">
+              <h2>${location.RetailAccounts}</h2>
+              <div class="location-distance">
+                <svg class="MuiSvgIcon-root location-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path>
+                </svg>
+                ${distance.toFixed(1)} miles away
+              </div>
+            </div>
+            <div class="detail-section">
+              <h3>Address</h3>
+              <p>${location.Address}</p>
+              <p>${location.City}, ${location.State}</p>
+              <a href="${googleMapsUrl}" target="_blank" class="get-directions-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 18l6-6-6-6"/>
+                </svg>
+                Get Directions
+              </a>
+            </div>
+          `;
+
+          detailPanel.classList.add("active");
+          locationList.classList.add("slide");
+        }
+
         function filterLocations() {
-          console.log(markerList.length);
           if (markerList.length > 0) {
             markerList.forEach((marker) => marker.remove());
-            markerList = []; // Reset the markers array
+            markerList = [];
           }
 
-          // Clear the location list before repopulating
-          locationList.innerHTML = "";
+          locationItems.innerHTML = "";
 
-          // Filter locations within the radius
           locations.forEach((location) => {
             const distance = calculateDistance(center, location.coordinates);
             if (distance <= radiusRange) {
-              // If the location is within the radius, add it to the map
               const marker = new mapboxgl.Marker()
                 .setLngLat(location.coordinates)
                 .setPopup(
@@ -208,13 +547,12 @@
               renderLocationList(location, distance);
             }
           });
-          console.log(locations.length);
         }
 
         function calculateDistance(coord1, coord2) {
-          const R = 3958.8; // Radius of the Earth in miles
-          const lat1 = (coord1[1] * Math.PI) / 180; // Convert latitude to radians
-          const lon1 = (coord1[0] * Math.PI) / 180; // Convert longitude to radians
+          const R = 3958.8;
+          const lat1 = (coord1[1] * Math.PI) / 180;
+          const lon1 = (coord1[0] * Math.PI) / 180;
           const lat2 = (coord2[1] * Math.PI) / 180;
           const lon2 = (coord2[0] * Math.PI) / 180;
 
@@ -228,7 +566,7 @@
               Math.sin(dlon / 2) *
               Math.sin(dlon / 2);
           const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-          const distance = R * c; // Distance in miles
+          const distance = R * c;
 
           return distance;
         }
@@ -237,25 +575,26 @@
           const item = document.createElement("div");
           item.className = "location-item";
           item.innerHTML = `
-          <div class="locationinfo">
-                <div class="location-header">
-                  <span class="location-name">${location.RetailAccounts}</span>
-                </div>
-                <div class="location-distance">
-                    <svg class="MuiSvgIcon-root location-icon" focusable="false" 
-                    viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path></svg>
-                    ${distance.toFixed(
-                  1
-                )} miles away
-                </div>
-                </div>
-                <div class="arrowicon">
-                    <svg class="MuiSvgIcon-root arrow-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.88 4.12L13.76 12l-7.88 7.88L8 22l10-10L8 2z"></path></svg>
-                    </div>
-                `
-                ;
-          locationList.appendChild(item);
+            <div class="locationinfo">
+              <div class="location-header">
+                <span class="location-name">${location.RetailAccounts}</span>
+              </div>
+              <div class="location-distance">
+                <svg class="MuiSvgIcon-root location-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path>
+                </svg>
+                ${distance.toFixed(1)} miles away
+              </div>
+            </div>
+            <div class="arrowicon">
+              <svg class="MuiSvgIcon-root arrow-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5.88 4.12L13.76 12l-7.88 7.88L8 22l10-10L8 2z"></path>
+              </svg>
+            </div>
+          `;
+          
+          item.addEventListener("click", () => showLocationDetails(location, distance));
+          locationItems.appendChild(item);
         }
       };
     </script>
