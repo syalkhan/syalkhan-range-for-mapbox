@@ -1,0 +1,359 @@
+[
+    {
+      "Retail Accounts": "The Brass Tap - Round Rock",
+      "Address": "204 East Main St.",
+      "City": "Round Rock",
+      "State": "TX",
+      "Zip Codes": "78664"
+    },
+    {
+      "Retail Accounts": "Total Wine #514",
+      "Address": "1201 Barbara Jordan Blvd., Ste 900",
+      "City": "Austin",
+      "State": "TX",
+      "Zip Codes": "78723"
+    },
+    {
+      "Retail Accounts": "Beer Geek",
+      "Address": "2051 W FM1626",
+      "City": "Manchaca",
+      "State": "TX",
+      "Zip Codes": "78652"
+    },
+    {
+      "Retail Accounts": "South Lamar Wine & Spirits",
+      "Address": "2418 South Lamar",
+      "City": "Austin",
+      "State": "TX",
+      "Zip Codes": "78704"
+    },
+    {
+      "Retail Accounts": "Central Market #420- Westgate",
+      "Address": "4477 S Lamar Blvd",
+      "City": "Austin",
+      "State": "TX",
+      "Zip Codes": "78745"
+    },
+    {
+      "Retail Accounts": "Turnstile Coffee Beer and Spirits",
+      "Address": "10025 Burnet Road",
+      "City": "Austin",
+      "State": "TX",
+      "Zip Codes": "78758"
+    },
+    {
+      "Retail Accounts": "HEB #735 - DRIVER MERCH",
+      "Address": "1503 Hwy 1431 West",
+      "City": "Marble Falls",
+      "State": "TX",
+      "Zip Codes": "78654"
+    },
+    {
+      "Retail Accounts": "Total Wine #509",
+      "Address": "5601 Brodie Lane",
+      "City": "Sunset Valley",
+      "State": "TX",
+      "Zip Codes": "78745"
+    },
+    {
+      "Retail Accounts": "What's On Tap - Highland Village",
+      "Address": "2570 FM 407 S 170",
+      "City": "Highland Village",
+      "State": "TX",
+      "Zip Codes": "75077"
+    },
+    {
+      "Retail Accounts": "Twisted Snifter",
+      "Address": "111 N Main St",
+      "City": "Weatherford",
+      "State": "TX",
+      "Zip Codes": "76086"
+    },
+    {
+      "Retail Accounts": "Central Market #55 - Southlake",
+      "Address": "1425 E Southlake Blvd",
+      "City": "Southlake",
+      "State": "TX",
+      "Zip Codes": "76092"
+    },
+    {
+      "Retail Accounts": "Southside Cellar",
+      "Address": "125 S Main St",
+      "City": "Fort Worth",
+      "State": "TX",
+      "Zip Codes": "76104"
+    },
+    {
+      "Retail Accounts": "Total Wine #502",
+      "Address": "5200 S Hulen Street",
+      "City": "Fort Worth",
+      "State": "TX",
+      "Zip Codes": "76132"
+    },
+    {
+      "Retail Accounts": "Total Wine #523 - Texas Sage",
+      "Address": "3101 Texas Sage Trail",
+      "City": "Fort Worth",
+      "State": "TX",
+      "Zip Codes": "76177"
+    },
+    {
+      "Retail Accounts": "The Bearded Monk",
+      "Address": "122 E McKinney St",
+      "City": "Denton",
+      "State": "TX",
+      "Zip Codes": "76201"
+    },
+    {
+      "Retail Accounts": "Midway Mart",
+      "Address": "406 W HICKORY",
+      "City": "Denton",
+      "State": "TX",
+      "Zip Codes": "76201"
+    },
+    {
+      "Retail Accounts": "Total Wine #511",
+      "Address": "1800 Loop 288 South",
+      "City": "Denton",
+      "State": "TX",
+      "Zip Codes": "76205"
+    },
+    {
+      "Retail Accounts": "Eskimo Hut #2 Lubbock",
+      "Address": "5412 Slide Rd.",
+      "City": "Lubbock",
+      "State": "TX",
+      "Zip Codes": "79414"
+    },
+    {
+      "Retail Accounts": "Total Wine #510",
+      "Address": "11066 Pecan Park Blvd Ste 117",
+      "City": "Cedar Park",
+      "State": "TX",
+      "Zip Codes": "78613"
+    },
+    {
+      "Retail Accounts": "HEB #660",
+      "Address": "3875 W. Davis Street",
+      "City": "Conroe",
+      "State": "TX",
+      "Zip Codes": "77304"
+    },
+    {
+      "Retail Accounts": "Total Wine #526 - Humble",
+      "Address": "9805 FM 1960 Bypass Road West",
+      "City": "Humble",
+      "State": "TX",
+      "Zip Codes": "77338"
+    },
+    {
+      "Retail Accounts": "The Cove at Hamblen",
+      "Address": "1101 Hamblen Road",
+      "City": "Kingwood",
+      "State": "TX",
+      "Zip Codes": "77339"
+    },
+    {
+      "Retail Accounts": "HEB #728",
+      "Address": "1702 11th St",
+      "City": "Huntsville",
+      "State": "TX",
+      "Zip Codes": "77340"
+    },
+    {
+      "Retail Accounts": "HEB #720",
+      "Address": "4517 Kingwood Drive",
+      "City": "Kingwood",
+      "State": "TX",
+      "Zip Codes": "77345"
+    },
+    {
+      "Retail Accounts": "HEB #498",
+      "Address": "7405 FM 1960 East",
+      "City": "Humble",
+      "State": "TX",
+      "Zip Codes": "77346"
+    },
+    {
+      "Retail Accounts": "HEB #767",
+      "Address": "13663 FM 1488",
+      "City": "Magnolia",
+      "State": "TX",
+      "Zip Codes": "77354"
+    },
+    {
+      "Retail Accounts": "HEB #722",
+      "Address": "7988 FM 1488",
+      "City": "Magnolia",
+      "State": "TX",
+      "Zip Codes": "77354"
+    },
+    {
+      "Retail Accounts": "Total Wine #524 - The Woodlands",
+      "Address": "1900 Lake Woodlands Drive",
+      "City": "The Woodlands",
+      "State": "TX",
+      "Zip Codes": "77380"
+    },
+    {
+      "Retail Accounts": "HEB #638",
+      "Address": "3601 FM 1488",
+      "City": "The Woodlands",
+      "State": "TX",
+      "Zip Codes": "77384"
+    },
+    {
+      "Retail Accounts": "HEB #757",
+      "Address": "10200 TX-242",
+      "City": "Conroe",
+      "State": "TX",
+      "Zip Codes": "77385"
+    },
+    {
+      "Retail Accounts": "HEB #705",
+      "Address": "3540 Rayford Road",
+      "City": "SPRING",
+      "State": "TX",
+      "Zip Codes": "77386"
+    },
+    {
+      "Retail Accounts": "HEB #610",
+      "Address": "2121 FM 2920",
+      "City": "SPRING",
+      "State": "TX",
+      "Zip Codes": "77388"
+    },
+    {
+      "Retail Accounts": "Legends Liquor",
+      "Address": "8650 N Sam Houston Pkwy. E.",
+      "City": "Houston",
+      "State": "TX",
+      "Zip Codes": "77396"
+    },
+    {
+      "Retail Accounts": "Total Wine #520 - DRIVER MERCH",
+      "Address": "8356 Agora Pkwy",
+      "City": "Selma",
+      "State": "TX",
+      "Zip Codes": "78154"
+    },
+    {
+      "Retail Accounts": "Muck & Fuss",
+      "Address": "295 E San Antonio Street",
+      "City": "New Braunfels",
+      "State": "TX",
+      "Zip Codes": "78130"
+    },
+    {
+      "Retail Accounts": "Bread Basket - Buda",
+      "Address": "2550 B FM 967",
+      "City": "Buda",
+      "State": "TX",
+      "Zip Codes": "78610"
+    },
+    {
+      "Retail Accounts": "HEB #243",
+      "Address": "641 E Hopkins St",
+      "City": "San Marcos",
+      "State": "TX",
+      "Zip Codes": "78666"
+    },
+    {
+      "Retail Accounts": "Bastrop Beer Company",
+      "Address": "1008 Main Street",
+      "City": "Bastrop",
+      "State": "TX",
+      "Zip Codes": "78602"
+    },
+    {
+      "Retail Accounts": "Richardson Beer & Wine",
+      "Address": "515 W Campbell Rd.",
+      "City": "Richardson",
+      "State": "TX",
+      "Zip Codes": "75080"
+    },
+    {
+      "Retail Accounts": "Pogo's Liquors",
+      "Address": "5360 W LOVERS LN STE 200",
+      "City": "Dallas",
+      "State": "TX",
+      "Zip Codes": "75209"
+    },
+    {
+      "Retail Accounts": "Total Wine #508",
+      "Address": "981 W I-20",
+      "City": "Arlington",
+      "State": "TX",
+      "Zip Codes": "76017"
+    },
+    {
+      "Retail Accounts": "Hall's Wine & Spirits",
+      "Address": "4200 Glade Rd",
+      "City": "Colleyville",
+      "State": "TX",
+      "Zip Codes": "76034"
+    },
+    {
+      "Retail Accounts": "Lone Star Beverages",
+      "Address": "3065 N Josey Lane",
+      "City": "Carrollton",
+      "State": "TX",
+      "Zip Codes": "75007"
+    },
+    {
+      "Retail Accounts": "Local Pint",
+      "Address": "2750 Churchill Dr #170",
+      "City": "Flowermound",
+      "State": "TX",
+      "Zip Codes": "75022"
+    },
+    {
+      "Retail Accounts": "Whip In #117",
+      "Address": "2240 Morriss Rd",
+      "City": "Flower Mound",
+      "State": "TX",
+      "Zip Codes": "75028"
+    },
+    {
+      "Retail Accounts": "Total Wine #505",
+      "Address": "721 N. Central Expy Ste. 200",
+      "City": "Plano",
+      "State": "TX",
+      "Zip Codes": "75075"
+    },
+    {
+      "Retail Accounts": "Northside Drafthouse & Eatery",
+      "Address": "3000 northside blvd unit 800",
+      "City": "Richardson",
+      "State": "TX",
+      "Zip Codes": "75080"
+    },
+    {
+      "Retail Accounts": "Holiday Depot Liquor - Bartonville",
+      "Address": "3501 FM 407 E",
+      "City": "Bartonville",
+      "State": "TX",
+      "Zip Codes": "76226"
+    },
+    {
+      "Retail Accounts": "HEB #793 - DRIVER MERCH",
+      "Address": "29388 I-10",
+      "City": "Boerne",
+      "State": "TX",
+      "Zip Codes": "78006"
+    },
+    {
+      "Retail Accounts": "GRAPE & GRAIN LIQUORS",
+      "Address": "1225 Bandera HWY",
+      "City": "KERRVILLE",
+      "State": "TX",
+      "Zip Codes": "78028"
+    },
+    {
+      "Retail Accounts": "Total Wine #503 - DRIVER MERCH",
+      "Address": "125 NW Loop 410",
+      "City": "San Antonio",
+      "State": "TX",
+      "Zip Codes": "78216"
+    }
+  ]

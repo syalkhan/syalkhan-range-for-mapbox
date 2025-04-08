@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Geocoding Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .input-section, .output-section {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-top: 10px;
+        }
+        .status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .progress {
+            background-color: #f0f0f0;
+            margin-top: 10px;
+            height: 20px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: #4CAF50;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        .api-key-section {
+            margin-bottom: 20px;
+        }
+        .error-log {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f8d7da;
+            border-radius: 4px;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>JSON Geocoding Tool</h1>
+        
+        <div class="api-key-section">
+            <label for="mapbox-key">Mapbox Access Token:</label>
+            <input type="text" id="mapbox-key" style="width: 100%; padding: 8px;">
+            <small>Get your token from <a href="https://account.mapbox.com/access-tokens/" target="_blank">Mapbox</a></small>
+        </div>
+        
+        <div class="input-section">
+            <h2>Upload JSON File</h2>
+            <input type="file" id="file-input" accept=".json">
+            <div id="file-info" style="margin-top: 10px;"></div>
+        </div>
+        
+        <div class="output-section">
+            <h2>Process Data</h2>
+            <button id="process-btn" disabled>Geocode Addresses</button>
+            <div class="progress" id="progress-container" style="display: none;">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div class="status" id="status"></div>
+            <div class="error-log" id="error-log" style="display: none;"></div>
+            <button id="download-btn" disabled style="background-color: #2196F3;">Download Modified JSON</button>
+        </div>
+        
+        <div>
+            <h2>Preview</h2>
+            <textarea id="preview" readonly></textarea>
+        </div>
+    </div>
+
+    <script>
+        // DOM elements
+        const fileInput = document.getElementById('file-input');
+        const fileInfo = document.getElementById('file-info');
+        const processBtn = document.getElementById('process-btn');
+        const downloadBtn = document.getElementById('download-btn');
+        const statusEl = document.getElementById('status');
+        const errorLogEl = document.getElementById('error-log');
+        const previewEl = document.getElementById('preview');
+        const progressContainer = document.getElementById('progress-container');
+        const progressBar = document.getElementById('progress-bar');
+        const mapboxKeyInput = document.getElementById('mapbox-key');
+        
+        let originalData = [];
+        let processedData = [];
+        let mapboxAccessToken = '';
+        let abortController = new AbortController();
+        
+        // Event listeners
+        fileInput.addEventListener('change', handleFileUpload);
+        processBtn.addEventListener('click', processData);
+        downloadBtn.addEventListener('click', downloadJSON);
+        mapboxKeyInput.addEventListener('input', updateMapboxKey);
+        
+        function updateMapboxKey() {
+            mapboxAccessToken = mapboxKeyInput.value.trim();
+            if (originalData.length > 0 && mapboxAccessToken) {
+                processBtn.disabled = false;
+            } else {
+                processBtn.disabled = true;
+            }
+        }
+        
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            fileInfo.textContent = `Selected file: ${file.name} (${(file.size / 1024).toFixed(2)} KB)`;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    originalData = JSON.parse(e.target.result);
+                    if (!Array.isArray(originalData)) {
+                        originalData = [originalData];
+                    }
+                    
+                    // Enable process button if we have data and API key
+                    if (originalData.length > 0 && mapboxAccessToken) {
+                        processBtn.disabled = false;
+                    }
+                    
+                    // Show preview
+                    previewEl.value = JSON.stringify(originalData.slice(0, 3), null, 2) + 
+                        (originalData.length > 3 ? '\n...' : '');
+                    
+                    statusEl.textContent = `Loaded ${originalData.length} records. Ready to geocode.`;
+                    statusEl.style.backgroundColor = '#e7f3fe';
+                } catch (error) {
+                    statusEl.textContent = `Error parsing JSON: ${error.message}`;
+                    statusEl.style.backgroundColor = '#ffdddd';
+                    processBtn.disabled = true;
+                }
+            };
+            reader.readAsText(file);
+        }
+        
+        async function processData() {
+            if (!originalData.length || !mapboxAccessToken) {
+                statusEl.textContent = 'No data or Mapbox token provided';
+                statusEl.style.backgroundColor = '#ffdddd';
+                return;
+            }
+            
+            // Reset state for new processing
+            abortController = new AbortController();
+            processBtn.disabled = true;
+            downloadBtn.disabled = true;
+            progressContainer.style.display = 'block';
+            progressBar.style.width = '0%';
+            errorLogEl.style.display = 'none';
+            errorLogEl.innerHTML = '';
+            statusEl.textContent = 'Starting geocoding process...';
+            statusEl.style.backgroundColor = '#fff3cd';
+            
+            try {
+                processedData = [];
+                let successCount = 0;
+                let errorCount = 0;
+                const errorMessages = [];
+                
+                // Batch processing parameters
+                const BATCH_SIZE = 50;
+                const DELAY_BETWEEN_BATCHES = 1000; // 1 second
+                const MAX_RETRIES = 3;
+                const RETRY_DELAY = 1000; // 1 second
+                
+                for (let i = 0; i < originalData.length; i++) {
+                    // Check if processing was aborted
+                    if (abortController.signal.aborted) {
+                        statusEl.textContent = 'Processing aborted by user';
+                        statusEl.style.backgroundColor = '#f8d7da';
+                        return;
+                    }
+                    
+                    const item = originalData[i];
+                    const address = `${item.Address || ''}, ${item.City || ''}, ${item.State || ''} ${item['Zip Codes'] || ''}`.trim();
+                    
+                    // Update progress
+                    const progress = Math.floor((i / originalData.length) * 100);
+                    progressBar.style.width = `${progress}%`;
+                    statusEl.textContent = `Processing ${i + 1} of ${originalData.length}: ${address.substring(0, 50)}${address.length > 50 ? '...' : ''}`;
+                    
+                    let attempts = 0;
+                    let coords = null;
+                    let error = null;
+                    
+                    // Retry logic with exponential backoff
+                    while (attempts < MAX_RETRIES) {
+                        try {
+                            coords = await geocodeAddress(address, abortController.signal);
+                            break;
+                        } catch (err) {
+                            error = err;
+                            attempts++;
+                            if (attempts < MAX_RETRIES) {
+                                await new Promise(resolve => setTimeout(resolve, RETRY_DELAY * attempts));
+                            }
+                        }
+                    }
+                    
+                    if (coords) {
+                        processedData.push({
+                            ...item,
+                            coordinates: coords
+                        });
+                        successCount++;
+                    } else {
+                        const errorEntry = {
+                            index: i,
+                            address: address,
+                            error: error?.message || 'Unknown error'
+                        };
+                        processedData.push({
+                            ...item,
+                            coordinates: null,
+                            geocode_error: errorEntry.error
+                        });
+                        errorMessages.push(`#${i+1}: ${errorEntry.address} - ${errorEntry.error}`);
+                        errorCount++;
+                    }
+                    
+                    // Add delay between batches to respect rate limits
+                    if ((i + 1) % BATCH_SIZE === 0 && i < originalData.length - 1) {
+                        await new Promise(resolve => setTimeout(resolve, DELAY_BETWEEN_BATCHES));
+                    }
+                }
+                
+                // Complete progress
+                progressBar.style.width = '100%';
+                
+                // Update status
+                statusEl.textContent = `Geocoding complete! ${successCount} succeeded, ${errorCount} failed.`;
+                statusEl.style.backgroundColor = successCount > 0 ? '#d4edda' : '#f8d7da';
+                
+                // Show errors if any
+                if (errorMessages.length > 0) {
+                    errorLogEl.style.display = 'block';
+                    errorLogEl.innerHTML = `<strong>Failed addresses (${errorCount}):</strong><br>` + 
+                        errorMessages.slice(0, 20).join('<br>') + 
+                        (errorMessages.length > 20 ? '<br>...and ' + (errorMessages.length - 20) + ' more' : '');
+                }
+                
+                // Enable download if we have any successes
+                if (successCount > 0) {
+                    downloadBtn.disabled = false;
+                }
+                
+                // Update preview
+                previewEl.value = JSON.stringify(processedData.slice(0, 3), null, 2) + 
+                    (processedData.length > 3 ? '\n...' : '');
+
+            } catch (error) {
+                if (error.name !== 'AbortError') {
+                    statusEl.textContent = `Error during geocoding: ${error.message}`;
+                    statusEl.style.backgroundColor = '#f8d7da';
+                }
+            } finally {
+                processBtn.disabled = false;
+            }
+        }
+        
+        async function geocodeAddress(address, signal) {
+            if (!address.trim()) {
+                throw new Error('Empty address');
+            }
+            
+            // Properly encode the address and limit to US (for better accuracy)
+            const encodedAddress = encodeURIComponent(address);
+            const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodedAddress}.json?country=US&limit=1&access_token=${mapboxAccessToken}`;
+            
+            const response = await fetch(url, { signal });
+            
+            // Handle rate limiting (429 status code)
+            if (response.status === 429) {
+                const retryAfter = response.headers.get('Retry-After') || 10;
+                await new Promise(resolve => setTimeout(resolve, retryAfter * 1000));
+                throw new Error('Rate limited - retrying');
+            }
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            if (data.features && data.features.length > 0) {
+                // Return longitude, latitude (as per Mapbox convention)
+                return data.features[0].geometry.coordinates;
+            } else {
+                throw new Error('No results found for this address');
+            }
+        }
+        
+        function downloadJSON() {
+            if (!processedData.length) {
+                statusEl.textContent = 'No processed data to download';
+                statusEl.style.backgroundColor = '#ffdddd';
+                return;
+            }
+            
+            const dataStr = JSON.stringify(processedData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'geocoded_data.json';
+            document.body.appendChild(a);
+            a.click();
+            
+            setTimeout(() => {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 100);
+        }
+    </script>
+</body>
+</html>
