@@ -9974,7 +9974,8 @@
     "coordinates": [
       -98.493648,
       29.424147
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "The Brewtique",
@@ -9985,7 +9986,8 @@
     "coordinates": [
       -97.820802,
       30.49774
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "The Brass Tap - Round Rock",
@@ -9996,7 +9998,8 @@
     "coordinates": [
       -97.677547,
       30.509225
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Total Wine #514",
@@ -10007,7 +10010,8 @@
     "coordinates": [
       -97.708034,
       30.305891
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Beer Geek",
@@ -10018,7 +10022,8 @@
     "coordinates": [
       -97.826877,
       30.140595
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "South Lamar Wine & Spirits",
@@ -10029,7 +10034,8 @@
     "coordinates": [
       -97.77768,
       30.246934
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Central Market #420- Westgate",
@@ -10040,7 +10046,8 @@
     "coordinates": [
       -97.79934,
       30.230686
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Turnstile Coffee Beer and Spirits",
@@ -10051,7 +10058,8 @@
     "coordinates": [
       -97.723377,
       30.384142
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "HEB #735 - DRIVER MERCH",
@@ -10062,7 +10070,8 @@
     "coordinates": [
       -98.276291,
       30.570264
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Total Wine #509",
@@ -10073,7 +10082,8 @@
     "coordinates": [
       -97.821936,
       30.225331
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "What's On Tap - Highland Village",
@@ -10084,7 +10094,8 @@
     "coordinates": [
       -97.069356,
       33.074303
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Twisted Snifter",
@@ -10095,7 +10106,8 @@
     "coordinates": [
       -97.797574,
       32.760035
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Central Market #55 - Southlake",
@@ -10106,7 +10118,8 @@
     "coordinates": [
       -97.131263,
       32.938963
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Southside Cellar",
@@ -10117,7 +10130,8 @@
     "coordinates": [
       -97.325664,
       32.742683
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Total Wine #502",
@@ -10128,7 +10142,8 @@
     "coordinates": [
       -97.40057,
       32.67286
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Total Wine #523 - Texas Sage",
@@ -10139,7 +10154,8 @@
     "coordinates": [
       -97.311641,
       32.913425
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "The Bearded Monk",
@@ -10150,7 +10166,8 @@
     "coordinates": [
       -97.131501,
       33.216481
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Midway Mart",
@@ -10161,7 +10178,8 @@
     "coordinates": [
       -97.13691,
       33.21498
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Total Wine #511",
@@ -10172,7 +10190,8 @@
     "coordinates": [
       -97.107296,
       33.187018
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Eskimo Hut #2 Lubbock",
@@ -10183,7 +10202,8 @@
     "coordinates": [
       -101.923506,
       33.544024
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Total Wine #510",
@@ -10194,7 +10214,8 @@
     "coordinates": [
       -97.801421,
       30.468585
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "HEB #660",
@@ -10205,7 +10226,8 @@
     "coordinates": [
       -95.500135,
       30.3257
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Total Wine #526 - Humble",
@@ -10216,7 +10238,8 @@
     "coordinates": [
       -95.273312,
       30.006126
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "The Cove at Hamblen",
@@ -10227,7 +10250,8 @@
     "coordinates": [
       -95.239569,
       30.029013
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "HEB #728",
@@ -10238,7 +10262,8 @@
     "coordinates": [
       -95.560731,
       30.722714
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "HEB #720",
@@ -10249,7 +10274,8 @@
     "coordinates": [
       -95.183744,
       30.052842
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "HEB #498",
@@ -10260,7 +10286,8 @@
     "coordinates": [
       -95.164397,
       30.000337
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "HEB #767",
@@ -10271,7 +10298,8 @@
     "coordinates": [
       -95.682004,
       30.221004
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "HEB #722",
@@ -10282,7 +10310,8 @@
     "coordinates": [
       -95.584482,
       30.222909
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Total Wine #524 - The Woodlands",
@@ -10293,7 +10322,8 @@
     "coordinates": [
       -95.464276,
       30.166006
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "HEB #638",
@@ -10304,7 +10334,8 @@
     "coordinates": [
       -95.476894,
       30.235656
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "HEB #757",
@@ -10315,7 +10346,8 @@
     "coordinates": [
       -95.425193,
       30.206301
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "HEB #705",
@@ -10326,7 +10358,8 @@
     "coordinates": [
       -95.387558,
       30.107952
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "HEB #610",
@@ -10337,7 +10370,8 @@
     "coordinates": [
       -95.451107,
       30.070465
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Legends Liquor",
@@ -10348,7 +10382,8 @@
     "coordinates": [
       -95.260357,
       29.93481
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Total Wine #520 - DRIVER MERCH",
@@ -10359,7 +10394,8 @@
     "coordinates": [
       -98.322502,
       29.57389
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Muck & Fuss",
@@ -10370,7 +10406,8 @@
     "coordinates": [
       -98.123571,
       29.704491
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Bread Basket - Buda",
@@ -10381,7 +10418,8 @@
     "coordinates": [
       -97.922947,
       30.095248
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "HEB #243",
@@ -10392,7 +10430,8 @@
     "coordinates": [
       -97.926311,
       29.887207
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Bastrop Beer Company",
@@ -10403,7 +10442,8 @@
     "coordinates": [
       -97.320401,
       30.110872
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Richardson Beer & Wine",
@@ -10414,7 +10454,8 @@
     "coordinates": [
       -96.7372,
       32.976211
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Pogo's Liquors",
@@ -10425,7 +10466,8 @@
     "coordinates": [
       -96.820546,
       32.850185
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Total Wine #508",
@@ -10436,7 +10478,8 @@
     "coordinates": [
       -97.120624,
       32.679475
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Hall's Wine & Spirits",
@@ -10447,7 +10490,8 @@
     "coordinates": [
       -97.10058,
       32.88186
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Lone Star Beverages",
@@ -10458,7 +10502,8 @@
     "coordinates": [
       -96.887815,
       32.999405
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Local Pint",
@@ -10469,7 +10514,8 @@
     "coordinates": [
       -97.072063,
       33.033901
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Whip In #117",
@@ -10480,7 +10526,8 @@
     "coordinates": [
       -97.046037,
       33.015624
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Total Wine #505",
@@ -10491,7 +10538,8 @@
     "coordinates": [
       -96.709614,
       33.010471
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Northside Drafthouse & Eatery",
@@ -10502,7 +10550,8 @@
     "coordinates": [
       -96.749294,
       32.993664
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Holiday Depot Liquor - Bartonville",
@@ -10513,7 +10562,8 @@
     "coordinates": [
       -97.128232,
       33.076672
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "HEB #793 - DRIVER MERCH",
@@ -10524,7 +10574,8 @@
     "coordinates": [
       -98.681285,
       29.734625
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "GRAPE & GRAIN LIQUORS",
@@ -10535,7 +10586,8 @@
     "coordinates": [
       -99.14282,
       30.03287
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Total Wine #503 - DRIVER MERCH",
@@ -10546,7 +10598,8 @@
     "coordinates": [
       -98.495789,
       29.521898
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Alamo City Liquor - Bitters",
@@ -10557,7 +10610,8 @@
     "coordinates": [
       -98.533663,
       29.601661
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "HEB #771",
@@ -10568,7 +10622,8 @@
     "coordinates": [
       -98.780023,
       29.423143
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Total Wine #504 - DRIVER MERCH",
@@ -10579,7 +10634,8 @@
     "coordinates": [
       -98.596195,
       29.60644
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Total Wine #537 - College Station",
@@ -10590,7 +10646,8 @@
     "coordinates": [
       -96.322632,
       30.616737
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Reserve 101",
@@ -10601,7 +10658,8 @@
     "coordinates": [
       -95.361263,
       29.756748
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Bad News Bar & Spirits Lodge",
@@ -10612,7 +10670,8 @@
     "coordinates": [
       -95.402388,
       29.717975
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Two Headed Dog",
@@ -10623,7 +10682,8 @@
     "coordinates": [
       -95.376218,
       29.741473
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Local Foods - Dunstan",
@@ -10634,7 +10694,8 @@
     "coordinates": [
       -95.41639,
       29.71955
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "D&Q Mini Mart/Beer Station",
@@ -10645,7 +10706,8 @@
     "coordinates": [
       -95.389108,
       29.734731
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Total Wine #525 - Copperfield",
@@ -10656,7 +10718,8 @@
     "coordinates": [
       -95.646686,
       29.880256
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "HEB #630",
@@ -10667,7 +10730,8 @@
     "coordinates": [
       -95.402662,
       29.738084
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "HEB #725",
@@ -10678,7 +10742,8 @@
     "coordinates": [
       -95.576846,
       30.054005
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Thistle Draftshop",
@@ -10689,7 +10754,8 @@
     "coordinates": [
       -95.450064,
       30.070329
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "HEB #020",
@@ -10700,7 +10766,8 @@
     "coordinates": [
       -95.673302,
       29.957217
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "HEB #656",
@@ -10711,7 +10778,8 @@
     "coordinates": [
       -95.744529,
       29.992462
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Total Wine #536",
@@ -10722,7 +10790,8 @@
     "coordinates": [
       -97.93615,
       30.30729
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "HEB #202",
@@ -10733,7 +10802,8 @@
     "coordinates": [
       -97.740962,
       30.334335
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Total Wine #522",
@@ -10744,7 +10814,8 @@
     "coordinates": [
       -97.745495,
       30.392449
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Central Market #491 - Houston",
@@ -10755,7 +10826,8 @@
     "coordinates": [
       -95.443985,
       29.741085
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Total Wine #527 - Sugar Land",
@@ -10766,7 +10838,8 @@
     "coordinates": [
       -95.63645,
       29.593125
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "HEB #563",
@@ -10777,7 +10850,8 @@
     "coordinates": [
       -95.68531,
       29.56473
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "HEB #558",
@@ -10788,7 +10862,8 @@
     "coordinates": [
       -95.190717,
       29.505762
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Craft 96 Draught House + Kitchen",
@@ -10799,7 +10874,8 @@
     "coordinates": [
       -95.042225,
       29.50374
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Total Wine #529 - Pearland",
@@ -10810,7 +10886,8 @@
     "coordinates": [
       -95.3808,
       29.55574
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Beers Looking at You",
@@ -10821,7 +10898,8 @@
     "coordinates": [
       -95.12637,
       29.54589
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Miller's Discount Liquor",
@@ -10832,7 +10910,8 @@
     "coordinates": [
       -94.164069,
       30.079545
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "The Moon Tower Inn",
@@ -10843,7 +10922,8 @@
     "coordinates": [
       -95.34094,
       29.7543
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Total Wine #530",
@@ -10854,7 +10934,8 @@
     "coordinates": [
       -95.388513,
       29.77342
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "HEB #744",
@@ -10865,7 +10946,8 @@
     "coordinates": [
       -95.396287,
       29.768721
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Kroger #312",
@@ -10876,7 +10958,8 @@
     "coordinates": [
       -95.411124,
       29.789189
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Heights Bier Garden",
@@ -10887,7 +10970,8 @@
     "coordinates": [
       -95.410305,
       29.797498
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Total Wine #517 - Memorial",
@@ -10898,73 +10982,8 @@
     "coordinates": [
       -95.551456,
       29.766991
-    ]
-  },
-  {
-    "RetailAccounts": "HEB #109",
-    "Address": "9710 Katy Fwy",
-    "City": "Houston",
-    "State": "TX",
-    "Zip Codes": "77055",
-    "coordinates": [
-      -95.532367,
-      29.787534
-    ]
-  },
-  {
-    "RetailAccounts": "Whole Foods - Post Oak",
-    "Address": "1700 Post Oak Blvd.",
-    "City": "Houston",
-    "State": "TX",
-    "Zip Codes": "77056",
-    "coordinates": [
-      -95.462188,
-      29.749641
-    ]
-  },
-  {
-    "RetailAccounts": "HEB #687",
-    "Address": "5895 San Felipe",
-    "City": "Houston",
-    "State": "TX",
-    "Zip Codes": "77057",
-    "coordinates": [
-      -95.485073,
-      29.748113
-    ]
-  },
-  {
-    "RetailAccounts": "Total Wine #519 - Grand Ave",
-    "Address": "5472 W Grand Parkway South",
-    "City": "Richmond",
-    "State": "TX",
-    "Zip Codes": "77406",
-    "coordinates": [
-      -95.77611,
-      29.693867
-    ]
-  },
-  {
-    "RetailAccounts": "Spec's #099",
-    "Address": "2410 Smith St",
-    "City": "Houston",
-    "State": "TX",
-    "Zip Codes": "77006",
-    "coordinates": [
-      -95.377233,
-      29.748582
-    ]
-  },
-  {
-    "RetailAccounts": "The Flying Saucer - Houston",
-    "Address": "705 Main Street, Ste A",
-    "City": "Houston",
-    "State": "TX",
-    "Zip Codes": "77002",
-    "coordinates": [
-      -95.362967,
-      29.758785
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "HEB #492",
@@ -10975,7 +10994,8 @@
     "coordinates": [
       -95.716957,
       29.789132
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "The Growler Spot",
@@ -10986,7 +11006,8 @@
     "coordinates": [
       -95.885933,
       29.690181
-    ]
+    ],
+    "type": "bar"
   },
   {
     "RetailAccounts": "Katy Beer Garden",
@@ -10997,6 +11018,7 @@
     "coordinates": [
       -95.81344,
       29.78702
-    ]
+    ],
+    "type": "bar"
   }
 ]

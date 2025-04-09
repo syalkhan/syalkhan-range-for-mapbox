@@ -36,10 +36,16 @@
         background-color: white;
         position: relative;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
       }
 
       #map {
         flex: 1;
+      }
+
+      .top-section {
+        flex-shrink: 0;
       }
 
       .searchfield {
@@ -135,44 +141,16 @@
         margin-right: 8px;
       }
 
-      .location-details {
-        background: #f9fafb;
-        padding: 16px;
-        border-radius: 8px;
-        margin-bottom: 24px;
-      }
-
-      .location-details.hidden {
-        display: none;
-      }
-
-      .location-details h2 {
-        font-size: 18px;
-        font-weight: 600;
-        margin-bottom: 8px;
-      }
-
-      .location-details p {
-        color: #4b5563;
-        margin-bottom: 4px;
-      }
-
       .locationlist {
         display: flex;
         flex-direction: column;
-        flex-grow: 1;
-        overflow-y: scroll;
-        height: 100vh;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        transition: transform 0.3s ease-in-out;
-        background: white;
+        position: relative;
+        height: 100%;
       }
 
-      .locationlist.slide {
-        transform: translateX(-100%);
+      .location-items {
+        flex: 1;
+        overflow-y: auto;
       }
 
       .location-item {
@@ -227,10 +205,12 @@
         left: 100%;
         top: 0;
         width: 100%;
-        height: 100vh;
+        height: 100%;
         background: white;
-        transition: transform 0.3s ease-in-out;
-        overflow-y: auto;
+        transition: transform 0.3s ease-out;
+        display: flex;
+        flex-direction: column;
+        z-index: 10;
       }
 
       .location-detail-panel.active {
@@ -252,6 +232,7 @@
 
       .location-detail-content {
         padding: 20px;
+        overflow-y: auto;
       }
 
       .detail-header {
@@ -321,6 +302,38 @@
       .mapboxgl-ctrl-geocoder--button {
         top: 8px !important;
       }
+
+      /* Custom marker tooltip */
+      .marker-tooltip {
+        background: #fff;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        padding: 8px 12px;
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 8px;
+        position: relative;
+        white-space: nowrap;
+        display: none;
+      }
+
+      .marker-container.active .marker-tooltip {
+        display: block;
+      }
+
+      .marker-tooltip:after {
+        content: '';
+        position: absolute;
+        bottom: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 6px solid #fff;
+      }
+      .mapboxgl-marker {
+        text-align:center;
+      }
     </style>
   </head>
 
@@ -328,36 +341,38 @@
     <div class="maincontainer">
       <div class="leftcontiner">
         <div class="locationlist">
-          <div class="searchfield">
-            <div id="geocoder"></div>
-          </div>
-          <div class="filter-section">
-            <button class="more-filters-btn">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 6h18M6 12h12m-9 6h6"/>
-              </svg>
-              More Filters
-            </button>
-            <div class="filters-content">
-              <div class="filter-group">
-                <label for="radius">Distance</label>
-                <div class="range-container">
-                  <input
-                    type="range"
-                    min="1"
-                    max="100"
-                    value="100"
-                    id="radius"
-                  />
-                  <span id="radius-value">100 miles</span>
+          <div class="top-section">
+            <div class="searchfield">
+              <div id="geocoder"></div>
+            </div>
+            <div class="filter-section">
+              <button class="more-filters-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 6h18M6 12h12m-9 6h6"/>
+                </svg>
+                More Filters
+              </button>
+              <div class="filters-content">
+                <div class="filter-group">
+                  <label for="radius">Distance</label>
+                  <div class="range-container">
+                    <input
+                      type="range"
+                      min="1"
+                      max="100"
+                      value="100"
+                      id="radius"
+                    />
+                    <span id="radius-value">100 miles</span>
+                  </div>
+                  <button class="reset-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                      <path d="M3 3v5h5"/>
+                    </svg>
+                    Reset Filters
+                  </button>
                 </div>
-                <button class="reset-btn">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-                    <path d="M3 3v5h5"/>
-                  </svg>
-                  Reset Filters
-                </button>
               </div>
             </div>
           </div>
@@ -385,6 +400,7 @@
       var radiusRange = 100;
       var markerList = [];
       var map;
+      var centerMarker = null;
 
       window.onload = function () {
         const radiusInput = document.getElementById("radius");
@@ -398,7 +414,6 @@
         const filtersContent = document.querySelector(".filters-content");
         const resetBtn = document.querySelector(".reset-btn");
 
-        // Initialize Mapbox Geocoder
         const geocoder = new MapboxGeocoder({
           accessToken: mapboxgl.accessToken,
           mapboxgl: mapboxgl,
@@ -408,22 +423,18 @@
 
         document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
 
-        // Handle location selection from geocoder
         geocoder.on('result', function(e) {
           const coords = e.result.center;
           center = coords;
           
-          // Update map center and recalculate distances
           map.flyTo({
             center: coords,
             zoom: 12,
             essential: true
           });
 
-          // Create new center marker
-          if (markerList.length > 0) {
-            markerList.forEach(marker => marker.remove());
-            markerList = [];
+          if (centerMarker) {
+            centerMarker.remove();
           }
 
           const el = document.createElement("div");
@@ -431,18 +442,16 @@
             <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
               <path fill="#FF0000" d="M16 0C10.477 0 6 4.477 6 10c0 6.273 10 22 10 22s10-15.727 10-22c0-5.523-4.477-10-10-10zm0 16a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"/>
             </svg>`;
-          new mapboxgl.Marker(el).setLngLat(coords).addTo(map);
+          centerMarker = new mapboxgl.Marker(el).setLngLat(coords).addTo(map);
 
           filterLocations();
         });
 
-        // Toggle More Filters
         moreFiltersBtn.addEventListener('click', () => {
           moreFiltersBtn.classList.toggle('active');
           filtersContent.classList.toggle('active');
         });
 
-        // Reset filters
         resetBtn.addEventListener('click', () => {
           radiusInput.value = 100;
           radiusRange = 100;
@@ -473,12 +482,18 @@
           zoom: 12,
         });
 
+        map.on('click', function() {
+          document.querySelectorAll('.marker-container').forEach(el => {
+            el.classList.remove('active');
+          });
+        });
+
         const el = document.createElement("div");
         el.innerHTML = `
             <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
             <path fill="#FF0000" d="M16 0C10.477 0 6 4.477 6 10c0 6.273 10 22 10 22s10-15.727 10-22c0-5.523-4.477-10-10-10zm0 16a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"/>
             </svg>`;
-        new mapboxgl.Marker(el).setLngLat(center).addTo(map);
+        centerMarker = new mapboxgl.Marker(el).setLngLat(center).addTo(map);
 
         fetch("locations.json")
           .then((response) => response.json())
@@ -488,11 +503,44 @@
           })
           .catch((error) => console.error("Error loading JSON data:", error));
 
+        function createMarkerElement(name, isBar = false) {
+          const markerEl = document.createElement('div');
+          markerEl.className = 'marker-container';
+          const markerColor = isBar ? '#808000' : '#333333';
+          markerEl.innerHTML = `
+            <div class="marker-tooltip">${name}</div>
+            <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+              <path fill="${markerColor}" d="M16 0C10.477 0 6 4.477 6 10c0 6.273 10 22 10 22s10-15.727 10-22c0-5.523-4.477-10-10-10zm0 16a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"/>
+            </svg>
+          `;
+          
+          markerEl.addEventListener('click', function(e) {
+            e.stopPropagation();
+            document.querySelectorAll('.marker-container').forEach(el => {
+              el.classList.remove('active');
+            });
+            this.classList.add('active');
+          });
+          
+          return markerEl;
+        }
+
         function showLocationDetails(location, distance) {
           map.flyTo({
             center: location.coordinates,
             zoom: 15,
             essential: true
+          });
+
+          markerList.forEach(marker => {
+            const markerEl = marker.getElement();
+            if (markerEl && marker.getLngLat().lng === location.coordinates[0] && 
+                marker.getLngLat().lat === location.coordinates[1]) {
+              document.querySelectorAll('.marker-container').forEach(el => {
+                el.classList.remove('active');
+              });
+              markerEl.classList.add('active');
+            }
           });
 
           const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${location.coordinates[1]},${location.coordinates[0]}`;
@@ -532,20 +580,28 @@
 
           locationItems.innerHTML = "";
 
-          locations.forEach((location) => {
-            const distance = calculateDistance(center, location.coordinates);
-            if (distance <= radiusRange) {
-              const marker = new mapboxgl.Marker()
-                .setLngLat(location.coordinates)
-                .setPopup(
-                  new mapboxgl.Popup().setHTML(
-                    `<strong>${location["RetailAccounts"]}</strong><br>${location["Address"]}, ${location["City"]}, ${location["State"]}`
-                  )
-                )
-                .addTo(map);
-              markerList.push(marker);
-              renderLocationList(location, distance);
-            }
+          const filteredLocations = locations
+            .map(location => ({
+              ...location,
+              distance: calculateDistance(center, location.coordinates)
+            }))
+            .filter(location => location.distance <= radiusRange)
+            .sort((a, b) => a.distance - b.distance);
+
+          filteredLocations.forEach((location) => {
+            const isBar = location.type === "bar";
+            const markerEl = createMarkerElement(location.RetailAccounts, isBar);
+            const marker = new mapboxgl.Marker(markerEl)
+              .setLngLat(location.coordinates)
+              .addTo(map);
+
+            markerEl.addEventListener('click', (e) => {
+              e.stopPropagation();
+              showLocationDetails(location, location.distance);
+            });
+
+            markerList.push(marker);
+            renderLocationList(location, location.distance);
           });
         }
 
@@ -593,7 +649,19 @@
             </div>
           `;
           
-          item.addEventListener("click", () => showLocationDetails(location, distance));
+          item.addEventListener("click", () => {
+            showLocationDetails(location, distance);
+            markerList.forEach(marker => {
+              const markerEl = marker.getElement();
+              if (markerEl && marker.getLngLat().lng === location.coordinates[0] && 
+                  marker.getLngLat().lat === location.coordinates[1]) {
+                document.querySelectorAll('.marker-container').forEach(el => {
+                  el.classList.remove('active');
+                });
+                markerEl.classList.add('active');
+              }
+            });
+          });
           locationItems.appendChild(item);
         }
       };
