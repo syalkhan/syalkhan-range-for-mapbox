@@ -29,6 +29,44 @@
       .maincontainer {
         display: flex;
         height: 100vh;
+        flex-direction: row;
+      }
+
+      @media (max-width: 1024px) {
+        .maincontainer {
+          flex-direction: column;
+        }
+        
+        .leftcontiner {
+          width: 100% !important;
+          height: auto;
+          order: 1;
+        }
+        
+        #map {
+          order: 2;
+          flex: 1;
+          height: 60vh;
+        }
+        
+        .mobile-toggle {
+          display: flex !important;
+          order: 3;
+        }
+        
+        .location-items {
+          display: none;
+        }
+        
+        .location-items.mobile-visible {
+          display: block;
+          height: 60vh;
+          overflow-y: auto;
+        }
+        
+        #map.mobile-hidden {
+          display: none;
+        }
       }
 
       .leftcontiner {
@@ -303,7 +341,6 @@
         top: 8px !important;
       }
 
-      /* Custom marker tooltip */
       .marker-tooltip {
         background: #fff;
         border-radius: 4px;
@@ -331,8 +368,32 @@
         border-right: 6px solid transparent;
         border-top: 6px solid #fff;
       }
+      
       .mapboxgl-marker {
-        text-align:center;
+        text-align: center;
+      }
+      
+      .marker-img {
+        width: 45px;
+        height: 45px;background: transparent !important;
+      }
+      
+      .center-marker {
+        z-index: 100 !important;
+      }
+      
+      .mobile-toggle {
+        display: none;
+        justify-content: center;
+        padding: 12px;
+        background-color: #2563eb;
+        color: white;
+        font-weight: 500;
+        cursor: pointer;
+      }
+      
+      .mobile-toggle:hover {
+        background-color: #1d4ed8;
       }
     </style>
   </head>
@@ -389,6 +450,9 @@
         </div>
       </div>
       <div id="map"></div>
+      <div class="mobile-toggle" id="mobileToggle">
+        Show List
+      </div>
     </div>
 
     <script>
@@ -413,6 +477,7 @@
         const moreFiltersBtn = document.querySelector(".more-filters-btn");
         const filtersContent = document.querySelector(".filters-content");
         const resetBtn = document.querySelector(".reset-btn");
+        const mobileToggle = document.getElementById("mobileToggle");
 
         const geocoder = new MapboxGeocoder({
           accessToken: mapboxgl.accessToken,
@@ -422,6 +487,24 @@
         });
 
         document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+
+        // Mobile toggle functionality
+        mobileToggle.addEventListener('click', function() {
+          const mapElement = document.getElementById('map');
+          const locationItemsElement = document.querySelector('.location-items');
+          
+          if (mapElement.classList.contains('mobile-hidden')) {
+            // Show map, hide list
+            mapElement.classList.remove('mobile-hidden');
+            locationItemsElement.classList.remove('mobile-visible');
+            mobileToggle.textContent = 'Show List';
+          } else {
+            // Show list, hide map
+            mapElement.classList.add('mobile-hidden');
+            locationItemsElement.classList.add('mobile-visible');
+            mobileToggle.textContent = 'Show Map';
+          }
+        });
 
         geocoder.on('result', function(e) {
           const coords = e.result.center;
@@ -506,12 +589,11 @@
         function createMarkerElement(name, isBar = false) {
           const markerEl = document.createElement('div');
           markerEl.className = 'marker-container';
-          const markerColor = isBar ? '#808000' : '#333333';
+          const markerImage = isBar ? 'bar.png' : 'restaurant.png';
+          
           markerEl.innerHTML = `
             <div class="marker-tooltip">${name}</div>
-            <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-              <path fill="${markerColor}" d="M16 0C10.477 0 6 4.477 6 10c0 6.273 10 22 10 22s10-15.727 10-22c0-5.523-4.477-10-10-10zm0 16a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"/>
-            </svg>
+            <img src="${markerImage}" class="marker-img">
           `;
           
           markerEl.addEventListener('click', function(e) {
